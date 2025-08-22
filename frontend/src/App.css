@@ -5,10 +5,16 @@ body {
   font-family: 'Inter';
 }
 
-.App-container {
+.page-layout {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column; /* Stacks items vertically */
   min-height: 100vh;
   background-color: #E4E3E3;
+}
+
+.main-content {
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+  align-items: center;
 }

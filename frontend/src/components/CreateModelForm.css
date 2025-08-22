@@ -1,5 +1,6 @@
 /* Rectangle 1 */
 .form-card {
+    position: relative;
     width: 561px;
     height: 593px;
     border-radius: 16px;
@@ -9,11 +10,67 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    padding-top: 20px;
+    padding: 30px 60px;
+    box-sizing: border-box;
+}
+
+.close-button {
+    position: absolute;
+    top: 5px;
+    right: 30px;
+
+    font-weight: bold;
+    font-size: 3rem;
+    cursor: pointer;
+    color: red;
+}
+
+.form-group {
+    width: 100%;
+    margin-bottom: 50px;
+    box-sizing: border-box;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: normal;
+    text-align: left;
+}
+
+.form-input {
+    display: block;
+    width: 100%;
+    border: 2px solid #999;
+    font-size: 1.25rem;
+}
+
+.form-button {
+    width: 100%;
+    padding: 25px;
+    border: none;
+    border-radius: 25px;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.button-upload {
+    background-color: #53B45A;
+    color: white;
+}
+
+.document-count {
+    text-align: center;
+    margin-bottom: 50px
+}
+
+.button-create {
+    background-color: #1A0CDF;
+    color: white;
 }
 
 h1 {
-    font-size: 2rem;
+    font-size: 2.25rem;
     font-weight: normal;
-    margin-bottom: 20px
+    margin-bottom: 60px
 }
