@@ -1,21 +1,53 @@
 .sidebar {
-  width: 450px; /* 18rem or w-72 in Tailwind */
+  width: 450px;
   height: 100vh;
-  box-sizing: border-box; /* Ensures padding is included in the width/height */
+  box-sizing: border-box;
 }
 
+/* This is the main white container. */
 .sidebar-content {
     background-color: #FFFFFF;
     height: 100%;
-    padding: 24 px;
-    display: flex;
-    flex-direction: column;
+    padding: 24px;
 }
 
+/* This centers the title perfectly. */
 .title {
-    font-size: 2rem;
+    font-size: 3rem;
     color: black;
     font-weight: bold;
-    margin-bottom: 40 px;
+    margin-bottom: 100px;
     text-align: center;
+}
+
+/* This is the container for our links. */
+.sidebar-content nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    /* This is the key: it tells the list to center its items. */
+    text-align: center;
+}
+
+/* We add a little space between each list item */
+.sidebar-content nav li {
+    margin-bottom: 1.5rem;
+}
+
+/* This styles the links themselves. */
+.nav-link {
+  text-decoration: none;
+  /* This allows the link to be centered by its parent. */
+  display: inline-block;
+  width: 250px;
+  padding: 0.75rem 0;
+  border-radius: 8px;
+  font-size: 1.5rem;
+  color: black;
+  transition: background-color 0.2s ease;
+}
+
+.nav-link.active {
+  background-color: #B8F6C1;
+  color: #02542D;
 }
