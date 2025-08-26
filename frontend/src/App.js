@@ -2,6 +2,7 @@ import './App.css';
 import React, { useState } from 'react';
 import CreateModelForm from './components/CreateModelForm';
 import TopBar from './components/TopBar';
+import CreateNewRAGModel from './components/CreateNewRAGModel';
 import NavigationBar from './components/NavigationBar';
 import { useAuth0 } from "@auth0/auth0-react";
 
@@ -16,6 +17,11 @@ function App() {
     user, // User profile
   } = useAuth0();
 
+  const handleModelCreate = () => {
+    setIsCreating(prevIsCreating => !prevIsCreating)
+  }
+
+
   const signup = () =>
     login({ authorizationParams: { screen_hint: "signup" } });
 
@@ -27,13 +33,16 @@ function App() {
   return isAuthenticated ? (
     <>
       <div className="page-layout">
+        {!isCreating && <NavigationBar />}
+
         <div className="main-content">
           {isCreating ? (
             <div className="form-container">
-              <CreateModelForm />
+              <CreateModelForm onCancelForm={handleModelCreate}/>
             </div>
           ) : (
-            <NavigationBar />
+
+            <CreateNewRAGModel onModelCreate={handleModelCreate}/>
           )}
         </div>
       </div>

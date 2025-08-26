@@ -1,12 +1,12 @@
 import React from 'react';
 import './CreateModelForm.css'; // Don't forget to import the CSS!
 
-function CreateModelForm() {
+function CreateModelForm({ onCancelForm }) {
     return (
         <div className="form-card">
-            <div className="close-button">
+            <button className="close-button" onClick={onCancelForm}>
                 &times;
-            </div>
+            </button>
             <h1>Create a New RAG Model</h1>
 
             <div className="form-group">
@@ -14,7 +14,7 @@ function CreateModelForm() {
                 <input 
                     type="text"
                     id="model-name"
-                    class="form-input"
+                    className="form-input"
                 />
             </div>
 

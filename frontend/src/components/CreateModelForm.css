@@ -18,6 +18,8 @@
     position: absolute;
     top: 5px;
     right: 30px;
+    background: none;
+    border: none;
 
     font-weight: bold;
     font-size: 3rem;
