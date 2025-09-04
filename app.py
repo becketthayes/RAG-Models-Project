@@ -3,12 +3,27 @@ from dotenv import load_dotenv
 import os
 import google.generativeai as genai
 from rag_pipeline import Rag_pipeline
+from authlib.integrations.flask_oauth2 import ResourceProtector, current_token
+from auth_utils import Auth0JWTBearerTokenValidator
+import psycopg2
 
 rag_pipeline = Rag_pipeline()
 
 load_dotenv() 
 
 os.makedirs('user_data', exist_ok=True)
+
+require_auth = ResourceProtector()
+validator = Auth0JWTBearerTokenValidator(os.getenv('AUTH0_DOMAIN'), os.getenv('AUTH0_API_AUDIENCE'))
+require_auth.register_token_validator(validator)
+
+conn = psycopg2.connect(
+    host=os.getenv('DB_HOST'),
+    port=os.getenv('DB_PORT'),
+    user=os.getenv('DB_USER'),
+    password=os.getenv('DB_PASSWORD'),
+    dbname=os.getenv('DB_NAME')
+)
 
 app = Flask(__name__)
 
@@ -17,10 +32,12 @@ genai.configure(api_key=API_KEY)
 print(bool(API_KEY))
 
 
-@app.route('/upload/<user_id>', methods=['POST'])
-def upload_file(user_id):
+@app.route('/upload', methods=['POST'])
+@require_auth()
+def upload_file():
+    auth0_user_id = current_token.get('sub')
     uploaded_files = request.files.getlist("files")
-    user_info_path = os.path.join('user_data', user_id)
+    user_info_path = os.path.join('user_data', auth0_user_id)
     os.makedirs(user_info_path, exist_ok=True)
     all_chunks = []
     all_metadata = []
@@ -39,9 +56,11 @@ def upload_file(user_id):
     if all_chunks:
         rag_pipeline.save_data(user_info_path, all_chunks, all_metadata)
 
-@app.route('/query/<user_id>', methods=['POST'])
-def handle_query(user_id):
-    user_info_path = os.path.join('user_data', user_id)
+@app.route('/query', methods=['POST'])
+@require_auth()
+def handle_query():
+    auth0_user_info = current_token.get('sub')
+    user_info_path = os.path.join('user_data', auth0_user_info)
     user_question = request.json['question']
 
     index, metadata, chunks = rag_pipeline.retrieve_data(user_info_path)
