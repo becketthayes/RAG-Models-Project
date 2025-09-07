@@ -1,6 +1,6 @@
 import './App.css';
 import React, { useState } from 'react';
-import CreateModelForm from './components/CreateModelForm';
+import CreateModelForm from './components/CreateModelForm.tsx';
 import TopBar from './components/TopBar';
 import CreateNewRAGModel from './components/CreateNewRAGModel';
 import NavigationBar from './components/NavigationBar';

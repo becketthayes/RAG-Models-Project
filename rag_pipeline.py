@@ -30,7 +30,7 @@ class Rag_pipeline():
                 text = page.extract_text()
                 if text:
                     full_text += text + "\n"
-        chunks = self.chunk_text(full_text)
+        chunks = self.chunk_text(full_text, 300)
         metadata = [{'source': filename} for _ in range(len(chunks))]
         return chunks, metadata
     
